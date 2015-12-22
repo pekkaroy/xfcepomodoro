@@ -4,7 +4,7 @@
 # This is intended to be used with xfce4-genmon-plugin.
 
 size=24         # Icon size in pixels
-ptime=25        # Time for the pomodoro cycle (in minutes)
+ptime=25 	# Time for the pomodoro cycle (in minutes)
 notify_time=5 # Time for notifcation to hang (in seconds)
 
 DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
@@ -46,7 +46,7 @@ if [ "$1" == "-n"  ] ; then
 
     fi
 else
-    echo "<click>$DIR/pomodoro.sh -n</click>"
+    echo "<click>$DIR/xfcepomodoro.sh -n</click>"
 
     if [ $stime -eq 0  ] ; then
         echo "<img>$DIR/icons/stopped$size.png</img>"
@@ -59,8 +59,10 @@ else
         echo "<tool>No Pomodoro Running</tool>"
 
     else
+	VALUE=$((rtime  * 100 / cycle )) #Bash does not support floats 
         echo "<img>$DIR/icons/running$size.png</img>"
-        echo "<tool>You have $(( rtime / 60  )):$(( rtime % 60  )) min left</tool>"
+        echo "<tool>You have $(( rtime / 60  )):$(( rtime % 60  )) min left.</tool>"
+	echo "<bar>$VALUE</bar>" 
     fi
 fi
 
